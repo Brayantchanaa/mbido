@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover"
+    />
+    <title>Notre Compte à Rebours Amoureux 💖</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(145deg, #ffb6c1 0%, #ff8da1 100%);
+        font-family:
+          "Segoe UI",
+          "Poppins",
+          "Quicksand",
+          system-ui,
+          -apple-system,
+          "Helvetica Neue",
+          sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Cœurs flottants animés en arrière-plan */
+      .floating-hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 1.5rem;
+        opacity: 0.3;
+        animation: floatHeart 12s infinite ease-in-out;
+        color: #fff0f3;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      @keyframes floatHeart {
+        0% {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        20% {
+          opacity: 0.5;
+        }
+        80% {
+          opacity: 0.4;
+        }
+        100% {
+          transform: translateY(-20vh) rotate(25deg);
+          opacity: 0;
+        }
+      }
+
+      /* Carte principale */
+      .card {
+        position: relative;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border-radius: 56px;
+        box-shadow:
+          0 30px 45px rgba(0, 0, 0, 0.2),
+          0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+        max-width: 700px;
+        width: 100%;
+        padding: 2rem 1.5rem 2.5rem;
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      /* En-tête romantique */
+      .relation-header {
+        margin-bottom: 1.2rem;
+      }
+
+      .relation-header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #c43a6b, #ff6f91);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: -0.5px;
+        display: inline-block;
+        margin-bottom: 0.3rem;
+      }
+
+      .sub {
+        font-size: 1rem;
+        color: #a13e5c;
+        background: #ffeef2;
+        display: inline-block;
+        padding: 0.3rem 1.2rem;
+        border-radius: 40px;
+        font-weight: 500;
+        backdrop-filter: blur(4px);
+      }
+
+      /* Le texte principal */
+      .love-message {
+        margin: 0.8rem 0 1rem;
+      }
+
+      .love-message p {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #aa2e5a;
+        background: rgba(255, 220, 230, 0.7);
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+      }
+
+      /* Compteur descendant type "contrat" */
+      .countdown-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin: 2rem 0 1.8rem;
+      }
+
+      .time-block {
+        background: #ffffffcc;
+        backdrop-filter: blur(8px);
+        border-radius: 42px;
+        padding: 0.9rem 0.5rem;
+        min-width: 100px;
+        flex: 1;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        border: 1px solid rgba(255, 255, 255, 0.9);
+      }
+
+      .time-block:hover {
+        transform: translateY(-5px);
+      }
+
+      .time-number {
+        font-size: 3.4rem;
+        font-weight: 800;
+        background: linear-gradient(145deg, #e8436e, #b82b54);
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        letter-spacing: 2px;
+        line-height: 1;
+        font-family: "Monaco", "Courier New", monospace;
+      }
+
+      .time-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #bf3f64;
+        margin-top: 8px;
+      }
+
+      /* Petit message spécial */
+      .special-note {
+        background: #fff0f4;
+        border-radius: 60px;
+        padding: 0.8rem 1rem;
+        margin: 20px 0 15px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #b13e62;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .special-note span {
+        font-size: 1.3rem;
+      }
+
+      /* Bouton pour créer une surprise */
+      .surprise-btn {
+        background: #ff8aa8;
+        border: none;
+        padding: 12px 28px;
+        border-radius: 60px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.25s;
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+      }
+
+      .surprise-btn:active {
+        transform: scale(0.96);
+        background: #e56e90;
+      }
+
+      /* Footer / date cible */
+      .date-target {
+        margin-top: 1.4rem;
+        font-size: 0.8rem;
+        color: #ad4d6e;
+        background: rgba(255, 235, 240, 0.7);
+        display: inline-block;
+        padding: 0.3rem 1rem;
+        border-radius: 30px;
+      }
+
+      /* Responsive pour petits mobiles */
+      @media (max-width: 550px) {
+        .card {
+          padding: 1.5rem 1rem 2rem;
+        }
+        .time-block {
+          min-width: 70px;
+          padding: 0.6rem 0.2rem;
+        }
+        .time-number {
+          font-size: 2.2rem;
+        }
+        .time-label {
+          font-size: 0.7rem;
+        }
+        .relation-header h1 {
+          font-size: 1.7rem;
+        }
+        .love-message p {
+          font-size: 1rem;
+        }
+        .surprise-btn {
+          padding: 10px 20px;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .time-number {
+          font-size: 1.8rem;
+        }
+        .countdown-grid {
+          gap: 0.6rem;
+        }
+      }
+
+      /* Animations d'apparition */
+      .card {
+        animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      }
+
+      @keyframes fadeSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <div class="card">
+      <div class="relation-header">
+        <h1>
+          ✨ Le compte à rebours du debut de notre potentielle relation ✨
+        </h1>
+        <div class="sub">
+          💗 Chaque jour me rapproche un peu plus de MBIDO 💗
+        </div>
+      </div>
+
+      <div class="love-message">
+        <p>⏳ Temps restant avant ma prochaine grande étape ⏳</p>
+      </div>
+
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="time-block">
+          <div class="time-number" id="years">00</div>
+          <div class="time-label">ANNÉES</div>
+        </div>
+        <div class="time-block">
+          <div class="time-number" id="months">00</div>
+          <div class="time-label">MOIS</div>
+        </div>
+        <div class="time-block">
+          <div class="time-number" id="days">00</div>
+          <div class="time-label">JOURS</div>
+        </div>
+        <div class="time-block">
+          <div class="time-number" id="hours">00</div>
+          <div class="time-label">HEURES</div>
+        </div>
+        <div class="time-block">
+          <div class="time-number" id="minutes">00</div>
+          <div class="time-label">MINUTES</div>
+        </div>
+        <div class="time-block">
+          <div class="time-number" id="seconds">00</div>
+          <div class="time-label">SECONDS</div>
+        </div>
+      </div>
+
+      <div class="special-note">
+        <span>💖💖💖</span> Jusqu'au jour où je vais pouvoir t'impacter
+        <span>💖💖💖</span>
+      </div>
+
+      <button class="surprise-btn" id="surpriseBtn">
+        ✨ Message de mes motivations pour toi ✨
+      </button>
+
+      <div class="date-target" id="targetDateDisplay">
+        <!-- La date cible s'affichera dynamiquement -->
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const TARGET_DATE = new Date(2031, 0, 7, 23, 59, 59); // 7 Janvier 2031, 23:59:59
+        // Mois: 0 = Janvier
+
+        // Vérification de validité
+        if (isNaN(TARGET_DATE.getTime())) {
+          console.error(
+            "Date cible invalide, utilisation d'une date de secours",
+          );
+          // Fallback: 7 janvier 2030 minuit
+          TARGET_DATE.setFullYear(2031, 0, 7);
+          TARGET_DATE.setHours(23, 59, 59, 0);
+        }
+
+        // Afficher la date cible de façon lisible
+        function formatTargetDate() {
+          const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          };
+          return TARGET_DATE.toLocaleDateString("fr-FR", options);
+        }
+
+        const targetDisplayElem = document.getElementById("targetDateDisplay");
+        if (targetDisplayElem) {
+          targetDisplayElem.innerHTML = `💕 Rendez-vous amoureux ultime : ${formatTargetDate()} 💕`;
+        }
+
+        // Éléments du DOM pour le compteur
+        const yearsSpan = document.getElementById("years");
+        const monthsSpan = document.getElementById("months");
+        const daysSpan = document.getElementById("days");
+        const hoursSpan = document.getElementById("hours");
+        const minutesSpan = document.getElementById("minutes");
+        const secondsSpan = document.getElementById("seconds");
+
+        function getRemainingTime() {
+          const now = new Date(); // heure locale de l'utilisateur
+          let diffMs = TARGET_DATE.getTime() - now.getTime();
+
+          // Si la date est déjà dépassée, on affiche 0 partout
+          if (diffMs <= 0) {
+            return {
+              years: 0,
+              months: 0,
+              days: 0,
+              hours: 0,
+              minutes: 0,
+              seconds: 0,
+            };
+          }
+
+          // Calcul du nombre de secondes restantes
+          const totalSeconds = Math.floor(diffMs / 1000);
+          const seconds = totalSeconds % 60;
+          const totalMinutes = Math.floor(totalSeconds / 60);
+          const minutes = totalMinutes % 60;
+          const totalHours = Math.floor(totalMinutes / 60);
+          const hours = totalHours % 24;
+          const totalDays = Math.floor(totalHours / 24);
+
+          // Pour les années et mois, on calcule la différence entre les dates de façon précise (en tenant compte des mois calendaires)
+          // Méthode plus romantique et précise pour afficher "X années, Y mois, Z jours restants"
+          const nowDate = new Date();
+          let target = new Date(TARGET_DATE);
+
+          let yearsRemaining = target.getFullYear() - nowDate.getFullYear();
+          let monthsRemaining = target.getMonth() - nowDate.getMonth();
+          let daysRemaining = target.getDate() - nowDate.getDate();
+
+          // Ajustement pour les jours négatifs
+          if (daysRemaining < 0) {
+            // On recule d'un mois et on ajoute le nombre de jours dans le mois précédent
+            const lastMonth = new Date(
+              target.getFullYear(),
+              target.getMonth(),
+              0,
+            );
+            const daysInLastMonth = lastMonth.getDate();
+            daysRemaining += daysInLastMonth;
+            monthsRemaining--;
+          }
+
+          // Ajustement pour les mois négatifs
+          if (monthsRemaining < 0) {
+            monthsRemaining += 12;
+            yearsRemaining--;
+          }
+
+          // Si jamais la différence globale est négative à cause d'un edge case, on remet à 0
+          if (yearsRemaining < 0) {
+            yearsRemaining = 0;
+            monthsRemaining = 0;
+            daysRemaining = 0;
+          }
+          if (monthsRemaining < 0) monthsRemaining = 0;
+          if (daysRemaining < 0) daysRemaining = 0;
+
+          // IMPORTANT: Les heures/minutes/secondes sont issues du calcul plus précis via diffMs (plus fiable)
+          // On utilise les valeurs déjà calculées hours, minutes, seconds pour les affichages horaires.
+          // Mais il faut s'assurer que les jours restants du calcul 'daysRemaining' correspondent bien aux jours totaux restants.
+          // Cependant, 'daysRemaining' peut être différent du totalDays % 30/31 mais plus cohérent pour les mois restants.
+          // Afin d'harmoniser, on utilise daysRemaining comme affichage des JOURS (après soustraction des années/mois complets)
+          // Pour éviter des incohérences, on garde le système de joursRemaining issu de la différence de dates.
+          // Mais il faut aussi recalculer les heures pour que le compte à rebours soit fluide.
+          // On recalcule les heures restantes du jour actuel en se basant sur diffMs après avoir retiré les jours complets.
+          // On va utiliser une approche plus robuste : le nombre total de jours restants (totalDays) peut être utilisé pour recalculer les années/mois restants.
+          // Mais pour un affichage élégant "Années, Mois, Jours, Heures..." l'utilisateur s'attend à un décompte naturel.
+          // Je vais utiliser la méthode basée sur la différence des dates pour années/mois/jours, et pour heures/minutes/secondes, les restes horaires.
+
+          // Calcul plus précis des heures/minutes/secondes restants dans la journée courante
+          const nowMs = now.getTime();
+          const targetMs = TARGET_DATE.getTime();
+          const diffTotalMs = targetMs - nowMs;
+          if (diffTotalMs <= 0) {
+            return {
+              years: 0,
+              months: 0,
+              days: 0,
+              hours: 0,
+              minutes: 0,
+              seconds: 0,
+            };
+          }
+
+          // Extraire les heures/minutes/secondes restantes à partir du timestamp
+          const totalRemainingSeconds = Math.floor(diffTotalMs / 1000);
+          const finalSeconds = totalRemainingSeconds % 60;
+          const totalRemainingMinutes = Math.floor(totalRemainingSeconds / 60);
+          const finalMinutes = totalRemainingMinutes % 60;
+          const totalRemainingHours = Math.floor(totalRemainingMinutes / 60);
+          const finalHours = totalRemainingHours % 24;
+
+          // On garde les valeurs d'années, mois, jours calculées plus tôt (yearsRemaining, monthsRemaining, daysRemaining)
+          // Pour une cohérence absolue, on peut recalculer les jours restants comme étant le nombre de jours entiers après soustraction des années/mois.
+          // mais le plus naturel pour un compte à rebours romantique : afficher "2 ans, 3 mois, 12 jours, 5 heures ..."
+          // avec des valeurs positives.
+
+          // Assurer que daysRemaining ne dépasse pas des valeurs trop grandes (max ~30/31), c'est le comportement attendu.
+          // On force si jamais daysRemaining est trop grand ou trop petit (ex: suite à des corrections de fuseau)
+          if (daysRemaining > 60) daysRemaining = 0; // cas improbable mais sécurité
+
+          // Petit correctif : Si l'écart total en jours (totalDays) est inférieur à 30, on pourrait avoir des incohérences,
+          // mais on garde la méthode date pour la douceur.
+
+          return {
+            years: Math.max(0, yearsRemaining),
+            months: Math.max(0, monthsRemaining),
+            days: Math.max(0, daysRemaining),
+            hours: finalHours,
+            minutes: finalMinutes,
+            seconds: finalSeconds,
+          };
+        }
+
+        // Mise à jour de l'affichage avec deux chiffres
+        function updateCountdown() {
+          const remaining = getRemainingTime();
+
+          yearsSpan.textContent = remaining.years.toString().padStart(2, "0");
+          monthsSpan.textContent = remaining.months.toString().padStart(2, "0");
+          daysSpan.textContent = remaining.days.toString().padStart(2, "0");
+          hoursSpan.textContent = remaining.hours.toString().padStart(2, "0");
+          minutesSpan.textContent = remaining.minutes
+            .toString()
+            .padStart(2, "0");
+          secondsSpan.textContent = remaining.seconds
+            .toString()
+            .padStart(2, "0");
+
+          // Changer le message d'ambiance selon le temps restant
+          const loveMsgElement = document.querySelector(".love-message p");
+          const totalRemainingMs = TARGET_DATE.getTime() - new Date().getTime();
+
+          if (totalRemainingMs <= 0) {
+            loveMsgElement.innerHTML =
+              "🎉 C’EST LE GRAND JOUR ! 🎉 Profitez de chaque instant ensemble ❤️";
+          } else if (remaining.years > 0) {
+            loveMsgElement.innerHTML = `⏳ Plus que ${remaining.years} an${remaining.years > 1 ? "s" : ""}, ${remaining.months} mois avant mon prime life ⏳`;
+          } else if (remaining.months > 0) {
+            loveMsgElement.innerHTML = `💫 Dans ${remaining.months} mois et ${remaining.days} jours, quelque chose de merveilleux m'attend 💫`;
+          } else if (remaining.days > 30) {
+            loveMsgElement.innerHTML = `🌙 Le compte à rebours est lancé... Plus que ${remaining.days} jours avant le 7 janvier 2031 🌙`;
+          } else if (remaining.days > 0) {
+            loveMsgElement.innerHTML = `✨ Bientôt ! Plus que ${remaining.days} jour${remaining.days > 1 ? "s" : ""} et déjà tant de pression de me surpasser ✨`;
+          } else if (remaining.hours > 0) {
+            loveMsgElement.innerHTML = `💗 Dans quelques heures seulement... Mon cœur s'emballe 💗`;
+          } else {
+            loveMsgElement.innerHTML = `⏳ Les dernières minutes avant le moment tant attendu... ⏳`;
+          }
+
+          // Si la date est atteinte, on peut afficher un message spécial
+          if (totalRemainingMs <= 0) {
+            const specialNoteDiv = document.querySelector(".special-note");
+            if (
+              specialNoteDiv &&
+              !specialNoteDiv.hasAttribute("data-celebrated")
+            ) {
+              specialNoteDiv.innerHTML = `<span>🎉🎉🎉</span> Bienvenu 7 JANVIER 2031 ! 🎉🎉🎉<span>🎉🎉🎉</span>`;
+              specialNoteDiv.style.background = "#ffdf6b";
+              specialNoteDiv.setAttribute("data-celebrated", "true");
+            }
+          }
+        }
+
+        // Mise à jour chaque seconde
+        let interval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Génération de cœurs flottants en arrière-plan
+        function createFloatingHeart() {
+          const heartsContainer = document.getElementById("heartsContainer");
+          if (!heartsContainer) return;
+          const heartEl = document.createElement("div");
+          heartEl.classList.add("heart");
+          const size = Math.random() * 24 + 16;
+          heartEl.style.fontSize = size + "px";
+          heartEl.style.left = Math.random() * 100 + "%";
+          heartEl.style.animationDuration = 8 + Math.random() * 12 + "s";
+          heartEl.style.animationDelay = Math.random() * 5 + "s";
+          heartEl.style.opacity = 0.2 + Math.random() * 0.4;
+          const heartSymbols = [
+            "❤️",
+            "💖",
+            "💗",
+            "💓",
+            "💕",
+            "💞",
+            "🌸",
+            "✨",
+            "🌹",
+            "💘",
+          ];
+          heartEl.textContent =
+            heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+          heartsContainer.appendChild(heartEl);
+
+          setTimeout(() => {
+            heartEl.remove();
+          }, 15000);
+        }
+
+        // Créer plusieurs cœurs flottants
+        setInterval(() => {
+          createFloatingHeart();
+          if (document.querySelectorAll(".heart").length < 28) {
+            if (Math.random() > 0.6) createFloatingHeart();
+          }
+        }, 1000);
+
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => createFloatingHeart(), i * 250);
+        }
+
+        // SURPRISE : Message secret avec modale douce (message plus personnalisable)
+        const surpriseBtn = document.getElementById("surpriseBtn");
+        if (surpriseBtn) {
+          surpriseBtn.addEventListener("click", () => {
+            const modalOverlay = document.createElement("div");
+            modalOverlay.style.position = "fixed";
+            modalOverlay.style.top = "0";
+            modalOverlay.style.left = "0";
+            modalOverlay.style.width = "100%";
+            modalOverlay.style.height = "100%";
+            modalOverlay.style.backgroundColor = "rgba(0,0,0,0.5)";
+            modalOverlay.style.backdropFilter = "blur(6px)";
+            modalOverlay.style.zIndex = "1000";
+            modalOverlay.style.display = "flex";
+            modalOverlay.style.alignItems = "center";
+            modalOverlay.style.justifyContent = "center";
+            modalOverlay.style.opacity = "0";
+            modalOverlay.style.transition = "opacity 0.3s ease";
+
+            const modalCard = document.createElement("div");
+            modalCard.style.background =
+              "linear-gradient(145deg, #fff5f8, #ffeef4)";
+            modalCard.style.maxWidth = "340px";
+            modalCard.style.width = "85%";
+            modalCard.style.borderRadius = "48px";
+            modalCard.style.padding = "1.8rem 1.5rem";
+            modalCard.style.textAlign = "center";
+            modalCard.style.boxShadow = "0 30px 40px rgba(0,0,0,0.3)";
+            modalCard.style.border = "1px solid rgba(255,255,240,0.8)";
+            modalCard.style.transform = "scale(0.9)";
+            modalCard.style.transition =
+              "transform 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1)";
+            modalCard.style.position = "relative";
+
+            const closeBtn = document.createElement("button");
+            closeBtn.innerHTML = "✖";
+            closeBtn.style.position = "absolute";
+            closeBtn.style.top = "14px";
+            closeBtn.style.right = "18px";
+            closeBtn.style.background = "none";
+            closeBtn.style.border = "none";
+            closeBtn.style.fontSize = "22px";
+            closeBtn.style.cursor = "pointer";
+            closeBtn.style.color = "#c06a8a";
+
+            const heartBig = document.createElement("div");
+            heartBig.style.fontSize = "3.2rem";
+            heartBig.innerHTML = "💌💖💌";
+
+            const messageTitle = document.createElement("h3");
+            messageTitle.innerText = "Pour toi, mon amour ❤️";
+            messageTitle.style.color = "#bc3f68";
+            messageTitle.style.margin = "16px 0 8px";
+            messageTitle.style.fontWeight = "700";
+
+            const secretText = document.createElement("p");
+            // Message personnalisable pour la relation
+            secretText.innerText =
+              "Dans la vie il y a des amours spontanés, des amours fou, des faux amoureux, des coups de foudre, mais il y a aussi des amours patients. Je te connais comme une fille forte de caractère, entreprenante, ambitieuse, assez intelligente et je souhaite que tu reste comme ca et que tu continues d'évoluer pleinement. Chose réelle peut-etre ca sera pas moi l'heureux élu j'pourrais etre deja ailleurs ou meme toi mais gardons le site je vais mettre mes coordonnées en bas je pense pas que ca va changer un jour du moins pas tous comme ca on pourra se retrouver si on devient pas des opps ! t'aime bien la guerre toi \n Whatsapp : 656400556 ;\n instagram : brayan_tchanaa ;\n snapchat : brayan_tchanaa ;\n adresse mail : brayantchanatchuenteu@gmail.com ;\n icloud : brayantchanaa@icloud.com";
+            secretText.style.color = "#9b3f5e";
+            secretText.style.lineHeight = "1.5";
+            secretText.style.margin = "12px 0 18px";
+            secretText.style.fontWeight = "500";
+
+            const okBtn = document.createElement("button");
+            okBtn.innerText = "💗 Fermer ce doux message 💗";
+            okBtn.style.background = "#ff8dab";
+            okBtn.style.border = "none";
+            okBtn.style.padding = "10px 20px";
+            okBtn.style.borderRadius = "40px";
+            okBtn.style.color = "white";
+            okBtn.style.fontWeight = "bold";
+            okBtn.style.cursor = "pointer";
+            okBtn.style.marginTop = "10px";
+            okBtn.style.fontSize = "0.9rem";
+
+            modalCard.appendChild(closeBtn);
+            modalCard.appendChild(heartBig);
+            modalCard.appendChild(messageTitle);
+            modalCard.appendChild(secretText);
+            modalCard.appendChild(okBtn);
+            modalOverlay.appendChild(modalCard);
+            document.body.appendChild(modalOverlay);
+
+            const removeModal = () => {
+              modalOverlay.style.opacity = "0";
+              setTimeout(() => {
+                if (modalOverlay.parentNode) modalOverlay.remove();
+              }, 300);
+            };
+
+            closeBtn.addEventListener("click", removeModal);
+            okBtn.addEventListener("click", removeModal);
+            modalOverlay.addEventListener("click", (e) => {
+              if (e.target === modalOverlay) removeModal();
+            });
+
+            setTimeout(() => {
+              modalOverlay.style.opacity = "1";
+              modalCard.style.transform = "scale(1)";
+            }, 10);
+          });
+        }
+
+        // Effet tactile pour les blocs
+        const allBlocks = document.querySelectorAll(".time-block");
+        allBlocks.forEach((block) => {
+          block.addEventListener("touchstart", () => {
+            block.style.transform = "scale(0.97)";
+            setTimeout(() => {
+              block.style.transform = "";
+            }, 150);
+          });
+        });
+
+        // petite animation de rappel si la date est atteinte
+        const checkCelebration = setInterval(() => {
+          if (new Date().getTime() >= TARGET_DATE.getTime()) {
+            updateCountdown();
+            const specialNote = document.querySelector(".special-note");
+            if (specialNote && specialNote.innerHTML.indexOf("🎉") === -1) {
+              specialNote.innerHTML = `<span>🎉🎉🎉</span> C'EST AUJOURD'HUI ! 7 JANVIER 2031 🎉🎉🎉<span>🎉🎉🎉</span>`;
+              specialNote.style.background = "#ffdf6b";
+            }
+            clearInterval(checkCelebration);
+          }
+        }, 1000);
+      })();
+    </script>
+  </body>
+</html>
